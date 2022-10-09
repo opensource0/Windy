@@ -23,7 +23,14 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Iterator;
-
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
 
     EditText editText;
@@ -35,6 +42,16 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        editText = findViewById(R.id.editText);
+        tempView = findViewById(R.id.temperatureval);
+        cloudView = findViewById(R.id.cloudsval);
+        latView = findViewById(R.id.latitudeval);
+        lonView = findViewById(R.id.longitudeval);
+        visView = findViewById(R.id.visibilityval);
+        timeView = findViewById(R.id.timezoneval);
+        cityView = findViewById(R.id.textView4);
+         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         editText = findViewById(R.id.editText);
         tempView = findViewById(R.id.temperatureval);
@@ -60,6 +77,12 @@ public class MainActivity extends AppCompatActivity {
 
             public void findweather(View view){
             Downloadtask task = new Downloadtask();
+            editText = (EditText)findViewById(R.id.editText);
+            String city = editText.getText().toString();
+            task.execute("https://api.openweathermap.org/data/2.5/weather?q="+city+"&appid=a26d9a475a4f262685d020cf32e5cbf1");
+            InputMethodManager mgr =(InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            mgr.hideSoftInputFromWindow(editText.getWindowToken(),0);
+                 Downloadtask task = new Downloadtask();
             editText = (EditText)findViewById(R.id.editText);
             String city = editText.getText().toString();
             task.execute("https://api.openweathermap.org/data/2.5/weather?q="+city+"&appid=a26d9a475a4f262685d020cf32e5cbf1");
